@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:titctok_clone/pages/authentication_controller.dart';
 
 import '../widgets/input_textfield_widget.dart';
 import 'login_screen.dart';
@@ -18,6 +19,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
   TextEditingController userNametextEditingController = TextEditingController();
 
   TextEditingController passwordtextEditingController = TextEditingController();
+  var authenticationController=AuthenticationController.instanceAuth;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -50,7 +52,11 @@ class _SignUpScreenState extends State<SignUpScreen> {
               height: 20,
             ),
             //profile pic
-            CircleAvatar(radius: 80,backgroundImage: AssetImage("images/profile.jpg"),),
+            GestureDetector(onTap: (){
+              setState(() {
+                authenticationController.chooseImageFromGallery();
+              });
+            },child: CircleAvatar(radius: 80,backgroundImage: AssetImage("images/profile.jpg"),)),
             //userName input textField--------------
             Container(
               width: MediaQuery.of(context).size.width,
