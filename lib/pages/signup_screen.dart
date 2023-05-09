@@ -15,19 +15,19 @@ class SignUpScreen extends StatefulWidget {
 
 class _SignUpScreenState extends State<SignUpScreen> {
   TextEditingController emailtextEditingController = TextEditingController();
-    TextEditingController userNametextEditingController = TextEditingController();
+  TextEditingController userNametextEditingController = TextEditingController();
 
   TextEditingController passwordtextEditingController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body:  SingleChildScrollView(
+      body: SingleChildScrollView(
         child: Center(
           child: Column(children: [
             const SizedBox(
               height: 100,
             ),
-            
+
             const SizedBox(
               height: 50,
             ),
@@ -46,7 +46,11 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 fontSize: 30,
               ),
             ),
-            const SizedBox(height: 20,),
+            const SizedBox(
+              height: 20,
+            ),
+            //profile pic
+            CircleAvatar(radius: 80,backgroundImage: AssetImage("images/profile.jpg"),),
             //userName input textField--------------
             Container(
               width: MediaQuery.of(context).size.width,
@@ -58,7 +62,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 iconData: Icons.person_2_outlined,
               ),
             ),
-            
+
             //emial input textField--------------
             Container(
               width: MediaQuery.of(context).size.width,
@@ -84,59 +88,57 @@ class _SignUpScreenState extends State<SignUpScreen> {
             const SizedBox(
               height: 25,
             ),
-            
-                    
+
             Column(
               children: [
                 //login button---------------------------------
-                 Container(
-                        // padding: const EdgeInsets.all(10),
-                        width: MediaQuery.of(context).size.width - 38,
-                        height: 60,
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(7),
-                            color: Colors.white),
-                        child: InkWell(
-                          onTap: () {
-                           
-                          },
-                          child: Center(
-                              child: Text(
-                            "Sign Up",
-                            style: TextStyle(
-                                color: Colors.black,
-                                fontSize: 25,
-                                fontWeight: FontWeight.bold),
-                          )),
-                        ),
-                      ),
-                    
-                        SizedBox(height: 15,),
+                Container(
+                  // padding: const EdgeInsets.all(10),
+                  width: MediaQuery.of(context).size.width - 38,
+                  height: 60,
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(7),
+                      color: Colors.white),
+                  child: InkWell(
+                    onTap: () {},
+                    child: Center(
+                        child: Text(
+                      "Sign Up",
+                      style: TextStyle(
+                          color: Colors.black,
+                          fontSize: 25,
+                          fontWeight: FontWeight.bold),
+                    )),
+                  ),
+                ),
+
+                SizedBox(
+                  height: 15,
+                ),
                 //signup button------------------
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(
                       "Aready have an account ?",
-                      style: TextStyle(color: Colors.grey,
-                       fontSize: 17),
+                      style: TextStyle(color: Colors.grey, fontSize: 17),
                     ),
                     GestureDetector(
-                      onTap: (){
-                    Get.to(LoginScreen());
-                                          },
+                      onTap: () {
+                        Get.to(LoginScreen());
+                      },
                       child: Text(
                         " Login Now",
-                        style: TextStyle(color: Colors.white, 
-                        fontSize: 24,fontWeight: FontWeight.bold),
+                        style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 24,
+                            fontWeight: FontWeight.bold),
                       ),
                     )
                   ],
                 )
               ],
-          
-
-                        ),
+            ),
           ]),
         ),
       ),
