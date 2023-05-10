@@ -1,8 +1,8 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
-import 'package:get/get_navigation/src/root/get_material_app.dart';
+//import 'package:get/get_core/src/get_main.dart';
+//import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'package:titctok_clone/pages/authentication_controller.dart';
 
 import 'pages/login_screen.dart';
