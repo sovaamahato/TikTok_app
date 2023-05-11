@@ -9,8 +9,8 @@ import 'pages/login_screen.dart';
 
 void main() async {
   await WidgetsFlutterBinding.ensureInitialized();
-  Firebase.initializeApp().then((value) async {
-    await Get.put(AuthenticationController());
+  Firebase.initializeApp().then((value)  {
+     Get.put(AuthenticationController());
   });
   runApp(const MyApp());
 }

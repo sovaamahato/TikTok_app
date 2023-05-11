@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:titctok_clone/pages/authentication_controller.dart';
 
+import '../widgets/global.dart';
 import '../widgets/input_textfield_widget.dart';
 import 'login_screen.dart';
 
@@ -19,7 +20,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
   TextEditingController userNametextEditingController = TextEditingController();
 
   TextEditingController passwordtextEditingController = TextEditingController();
-  var authenticationController=AuthenticationController.instanceAuth;
+  var authenticationController = AuthenticationController.instanceAuth;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -52,11 +53,16 @@ class _SignUpScreenState extends State<SignUpScreen> {
               height: 20,
             ),
             //profile pic
-            GestureDetector(onTap: (){
-              setState(() {
-                authenticationController.chooseImageFromGallery();
-              });
-            },child: CircleAvatar(radius: 80,backgroundImage: AssetImage("images/profile.jpg"),)),
+            GestureDetector(
+                onTap: () {
+                  setState(() {
+                    authenticationController.chooseImageFromGallery();
+                  });
+                },
+                child: CircleAvatar(
+                  radius: 80,
+                  backgroundImage: AssetImage("images/profile.jpg"),
+                )),
             //userName input textField--------------
             Container(
               width: MediaQuery.of(context).size.width,
@@ -106,7 +112,24 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       borderRadius: BorderRadius.circular(7),
                       color: Colors.white),
                   child: InkWell(
-                    onTap: () {},
+                    onTap: () {
+
+                      //validate and then create new account for user----------------------------
+                      if (authenticationController.profileImage != null &&
+                          userNametextEditingController.text.isNotEmpty &&
+                          emailtextEditingController.text.isNotEmpty &&
+                          passwordtextEditingController.text.isNotEmpty) {
+                        authenticationController.createNewAccount(
+                            authenticationController.profileImage!,
+                            userNametextEditingController.text,
+                            emailtextEditingController.text,
+                            passwordtextEditingController.text);
+
+                            setState(() {
+                              showProgressBar = true;
+                            });
+                      }
+                    },
                     child: Center(
                         child: Text(
                       "Sign Up",

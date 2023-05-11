@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import '../widgets/global.dart';
 
 
 import 'package:google_fonts/google_fonts.dart';
@@ -16,7 +17,7 @@ class LoginScreen extends StatefulWidget {
 class _LoginScreenState extends State<LoginScreen> {
   TextEditingController emailtextEditingController = TextEditingController();
   TextEditingController passwordtextEditingController = TextEditingController();
-  bool showProgressBar = false;
+  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
