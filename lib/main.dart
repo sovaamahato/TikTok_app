@@ -8,9 +8,9 @@ import 'package:titctok_clone/pages/authentication_controller.dart';
 import 'pages/login_screen.dart';
 
 void main() async {
-  WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp().then((value) {
-    Get.put(AuthenticationController());
+  await WidgetsFlutterBinding.ensureInitialized();
+  Firebase.initializeApp().then((value) async {
+    await Get.put(AuthenticationController());
   });
   runApp(const MyApp());
 }
@@ -22,9 +22,12 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
-      theme: ThemeData.dark().copyWith(scaffoldBackgroundColor: Color.fromARGB(255, 36, 35, 35)),
+      theme: ThemeData.dark()
+          .copyWith(scaffoldBackgroundColor: Color.fromARGB(255, 36, 35, 35)),
       home: LoginScreen(),
-
+      initialBinding: BindingsBuilder(() {
+        Get.put(AuthenticationController());
+      }),
     );
   }
 }
