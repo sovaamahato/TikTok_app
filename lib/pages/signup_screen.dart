@@ -114,20 +114,22 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   child: InkWell(
                     onTap: () {
 
+                       setState(() {
+                              showProgressBar = true;
+                            });
+
                       //validate and then create new account for user----------------------------
                       if (authenticationController.profileImage != null &&
                           userNametextEditingController.text.isNotEmpty &&
                           emailtextEditingController.text.isNotEmpty &&
                           passwordtextEditingController.text.isNotEmpty) {
-                        authenticationController.createNewAccount(
+                        AuthenticationController.instanceAuth.createNewAccount(
                             authenticationController.profileImage!,
                             userNametextEditingController.text,
                             emailtextEditingController.text,
                             passwordtextEditingController.text);
 
-                            setState(() {
-                              showProgressBar = true;
-                            });
+                           
                       }
                     },
                     child: Center(

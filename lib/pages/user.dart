@@ -2,7 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 
 class User{
   String? name;
-  String?uid;
+  String? uid;
   String? email;
   String? image;
   String? youtube;
