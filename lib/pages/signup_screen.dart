@@ -131,6 +131,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
                            
                       }
+                      else{
+                        Get.snackbar("Invalid Input", "please fill all the information");
+                      }
                     },
                     child: Center(
                         child: Text(

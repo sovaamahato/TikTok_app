@@ -8,6 +8,7 @@ import 'package:simple_circular_progress_bar/simple_circular_progress_bar.dart';
 import 'package:titctok_clone/pages/signup_screen.dart';
 
 import '../widgets/input_textfield_widget.dart';
+import 'authentication_controller.dart';
 
 class LoginScreen extends StatefulWidget {
   @override
@@ -17,6 +18,9 @@ class LoginScreen extends StatefulWidget {
 class _LoginScreenState extends State<LoginScreen> {
   TextEditingController emailtextEditingController = TextEditingController();
   TextEditingController passwordtextEditingController = TextEditingController();
+
+    var authenticationController = AuthenticationController.instanceAuth;
+
   
   @override
   Widget build(BuildContext context) {
@@ -92,6 +96,14 @@ class _LoginScreenState extends State<LoginScreen> {
                             setState(() {
                               showProgressBar = true;
                             });
+
+                            if(
+                  emailtextEditingController.text.isNotEmpty&&
+                  passwordtextEditingController.text.isNotEmpty){
+                     authenticationController.LoginNewUser(emailtextEditingController.text, passwordtextEditingController.text);
+
+                  }
+                           
                           },
                           child: Center(
                               child: Text(

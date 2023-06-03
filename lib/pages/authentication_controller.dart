@@ -1,3 +1,4 @@
+//import 'dart:ffi';
 import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -6,13 +7,18 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:titctok_clone/pages/login_screen.dart';
+import 'package:titctok_clone/pages/signup_screen.dart';
 import 'package:titctok_clone/widgets/global.dart';
+import 'home_screen.dart';
 import 'user.dart' as userModal;
 
 class AuthenticationController extends GetxController {
   static AuthenticationController instanceAuth = Get.find();
 
+  late Rx<User?>_currentUser;
+
   late Rx<File?> _pickedFile;
+
 
   File? get profileImage => _pickedFile.value;
 
@@ -27,8 +33,7 @@ class AuthenticationController extends GetxController {
   }
 
   void captureImageWithCamera() async {
-    final pickedImageFile =
-        await ImagePicker().pickImage(source: ImageSource.camera);
+    final pickedImageFile =await ImagePicker().pickImage(source: ImageSource.camera);
 
     if (pickedImageFile != null) {
       Get.snackbar("profile image", "successfully selected profile picture");
@@ -38,11 +43,11 @@ class AuthenticationController extends GetxController {
 
   void createNewAccount(File imageFile, String userName, String userEmail,
       String password) async {
-//          File? imageFile = _pickedFile.value;
-// if (imageFile == null) {
-//   // Handle the case where the image file is null
-//   return;
-// }
+         File? imageFile = _pickedFile.value;
+if (imageFile == null) {
+  // Handle the case where the image file is null
+  return;
+}
     try {
       showProgressBar = true;
       //1. create user in the firebase authentication
@@ -86,6 +91,8 @@ class AuthenticationController extends GetxController {
     }
   }
 
+
+
   Future<String> uploadImageToStorage(File imageFile) async {
     Reference reference = FirebaseStorage.instance
         .ref()
@@ -97,5 +104,48 @@ class AuthenticationController extends GetxController {
 
     String downloadUrlUploadImage = await taskSnapshot.ref.getDownloadURL();
     return downloadUrlUploadImage;
+  }
+
+
+
+  
+  //to login a new account
+  void LoginNewUser(String userEmail,String password)async {
+    try{
+      await FirebaseAuth.instance.signInWithEmailAndPassword(email: userEmail, password: password);
+      Get.snackbar("Congratulations!!","login Succefful");
+      
+
+
+    }
+    catch(error){
+      Get.snackbar("Error", "Login unsuccessful");
+      Get.to(LoginScreen());
+    }
+  }
+
+
+
+  //to take the user to homescreen after successfull login
+  goToScreen(User? currentUser){
+    //if not login
+    if(currentUser==null)
+    {
+      Get.offAll(LoginScreen());
+
+    }
+    else{
+      Get.offAll(HomeScreen());
+    }
+  }
+
+  @override
+  void onReady() {
+    // TODO: implement onReady
+    super.onReady();
+
+    _currentUser=Rx<User?>(FirebaseAuth.instance.currentUser); 
+    _currentUser.bindStream(FirebaseAuth.instance.authStateChanges());
+    ever(_currentUser, goToScreen);
   }
 }
