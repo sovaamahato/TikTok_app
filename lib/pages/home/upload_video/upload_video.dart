@@ -1,21 +1,46 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:image_picker/image_picker.dart';
+
+import 'upload_form.dart';
 
 class UploadVideo extends StatefulWidget {
-  const UploadVideo({super.key});
+  //const UploadVideo({super.key});
+
 
   @override
   State<UploadVideo> createState() => _UploadVideoState();
 }
 
 class _UploadVideoState extends State<UploadVideo> {
+
+//funtion to choose either to open gallery for selecting video or record video using camera
+  getVideoFile(ImageSource sourceImg) async{
+    final videoFile= await ImagePicker().getVideo(source: sourceImg);
+
+    if(videoFile!=null){
+      Get.to(
+        //if video file is selected then call this wala page whwre video will be played
+        UploadForm(
+          videoFile:File(videoFile.path),
+          videoPath:videoFile.path
+        )
+      );
+      
+    }
+
+  }
   Future ShowDialogBox() {
     return showDialog(
         context: context,
         builder: ((context) => SimpleDialog(
               children: [
                 SimpleDialogOption(
-                  onPressed: () {},
+                  onPressed: () {
+                    getVideoFile(ImageSource.gallery);
+                  },
                   child: Row(
                     children: [
                       Icon(
@@ -37,7 +62,9 @@ class _UploadVideoState extends State<UploadVideo> {
 
 
                 SimpleDialogOption(
-                  onPressed: () {},
+                  onPressed: () {
+                    getVideoFile(ImageSource.camera);
+                  },
                   child: Row(
                     children: [
                       Icon(
