@@ -5,7 +5,7 @@ import '../widgets/global.dart';
 
 import 'package:google_fonts/google_fonts.dart';
 import 'package:simple_circular_progress_bar/simple_circular_progress_bar.dart';
-import 'package:titctok_clone/pages/signup_screen.dart';
+//import 'package:titctok_clone/pages/signup_screen.dart';
 
 import '../widgets/input_textfield_widget.dart';
 import 'authentication_controller.dart';

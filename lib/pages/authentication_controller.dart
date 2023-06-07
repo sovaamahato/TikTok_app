@@ -7,7 +7,7 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:titctok_clone/pages/login_screen.dart';
-import 'package:titctok_clone/pages/signup_screen.dart';
+//import 'package:titctok_clone/pages/signup_screen.dart';
 import 'package:titctok_clone/widgets/global.dart';
 import 'home_screen.dart';
 import 'user.dart' as userModal;
